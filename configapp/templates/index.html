@@ -115,7 +115,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">link</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -123,8 +123,8 @@
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_news' %}">Add news</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_categories' %}">Add categories</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
@@ -146,7 +146,9 @@
     <ul class="list-group">
         <li class="list-group-item active" aria-current="true">Category</li>
         {% for item in categories %}
-        <li class="list-group-item"><a href="{%url 'categories' item.pk %}">{{ item.title }}</a></li>
+        <li class="list-group-item">
+        <a href="{% url 'category_news' item.id %}">{{ item.title }}</a>
+        </li>
         {% endfor %}
     </ul>
   </div>
@@ -155,7 +157,7 @@
     {% for item in news %}
     <div class="card text-center mt-4">
       <div class="card-header">
-        {{ item.title }}
+      {{ item.title }}
       </div>
       <div class="card-body">
         <div class="row">
@@ -169,8 +171,11 @@
         </div>
         <h5 class="card-title">{{item.title}}</h5>
         <p class="card-text">{{item.context |safe|linebreaks|truncatewords:50}}</p>
+
         <a href="{%url 'new_about' item.pk%}" class="btn btn-primary mt-3">Go somewhere</a>
+
       </div>
+
       <div class="card-footer text-muted">
         {{ item.created_ed|date:"Y-m-d" }}
       </div>
